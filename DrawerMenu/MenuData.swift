@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct MenuData {
+public struct MenuData {
     var backButtonVisible: Bool
     var shouldEdit: Bool
     var sections: [MenuSection]
@@ -33,14 +33,14 @@ struct MenuData {
         - shouldEdit: Boolean that indicates if the menu should be editable. Default is false.
         - backButton: Boolean that indicates if the menu should have a back button. Default is false.
     */
-    init(_ title: String, _ items: [String], _ shouldEdit: Bool = false, _ backButton: Bool = false) {
+    public init(_ title: String, _ items: [String], _ shouldEdit: Bool = false, _ backButton: Bool = false) {
         self.sections = [MenuSection(items, title: title)]
         self.shouldEdit = shouldEdit
         self.backButtonVisible = backButton
     }
 }
 
-struct MenuSection {
+public struct MenuSection {
     var title : String
     var items : [String]
     
@@ -50,7 +50,7 @@ struct MenuSection {
         - items: Collection of the different menu items for the section.
         - title: The header title displayed for the section.
     */
-    init(_ items: [String], title: String) {
+    public init(_ items: [String], title: String) {
         self.title = title
         self.items = items
     }

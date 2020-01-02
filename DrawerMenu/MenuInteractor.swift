@@ -38,7 +38,7 @@ class MenuInteractor: NSObject {
     }
 }
 
-protocol MenuInteractorDelegate : class {
+public protocol MenuInteractorDelegate : class {
     /**
       * Sets the data source for the menu, implementation should return MenuDataObject. Can be used to reconfigure menu properites when the data source is changed or updated.
      - Parameters:
@@ -113,7 +113,8 @@ extension MenuInteractor: UITableViewDataSource {
 
 extension MenuInteractor: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let header = Bundle.main.loadNibNamed(HEADER_VIEW, owner: self, options: nil)?.first as? DrawerHeaderView else {
+        let bundle = Bundle.init(identifier: "com.erj.DrawerMenu")
+        guard let header = bundle?.loadNibNamed(HEADER_VIEW, owner: self, options: nil)?.first as? DrawerHeaderView else {
             print("Failed to load and cast view")
             return UIView()
         }

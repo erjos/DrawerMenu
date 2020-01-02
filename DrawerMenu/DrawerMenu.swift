@@ -9,11 +9,11 @@
 import Foundation
 import UIKit
 
-class DrawerMenu: UIControl {
+public class DrawerMenu: UIControl {
     
-    weak var gestureDelegate : DrawerGestureDelegate?
+    public weak var gestureDelegate : DrawerGestureDelegate?
     
-    weak var delegate: MenuInteractorDelegate? {
+    public weak var delegate: MenuInteractorDelegate? {
         get { return menuInteractor.delegate }
         set { menuInteractor.delegate = newValue }
     }
@@ -58,7 +58,7 @@ class DrawerMenu: UIControl {
     /**
      Call this function if you want to reload the menu data or change the menu data source. It will trigger the setDataSource(drawerMenu: DrawerMenu)-> MenuData delegate function.
     */
-    func loadMenu() {
+    public func loadMenu() {
         //triggers delegate function on menu interactor to retrieve the data source from the delegate
         menuInteractor.setMenuData(self)
         menuView.reloadData()
@@ -67,14 +67,14 @@ class DrawerMenu: UIControl {
     /**
      Returns a pan gesture that is used to open and close the menu. Add it to the view that is responsible for displaying the menu and implement the MenuGestureDelegate to handle the selector.
     */
-    func getPanGesture() -> UIPanGestureRecognizer {
+    public func getPanGesture() -> UIPanGestureRecognizer {
         return UIPanGestureRecognizer(target: gestureDelegate, action: #selector(gestureDelegate?.handlePanGesture(_:)))
     }
     
     /**
      Opens the menu display.
     */
-    func openMenu() {
+    public func openMenu() {
         setupDisplay()
         UIView.animate(withDuration: 0.2) {
             guard let parent = self.superview else { return }
@@ -89,7 +89,7 @@ class DrawerMenu: UIControl {
     /**
      Closes the menu display.
     */
-    func closeMenu() {
+    public func closeMenu() {
         UIView.animate(withDuration: 0.2) {
             guard let parent = self.superview else { return }
             self.menuView.frame = CGRect(x: 0, y: 0, width: 0, height: parent.frame.height)
@@ -133,7 +133,7 @@ class DrawerMenu: UIControl {
      - Parameters:
         - gesture: The pan gesture on the view, which controls the menu.
     */
-    func handleGesture(_ gesture: UIPanGestureRecognizer) {
+    public func handleGesture(_ gesture: UIPanGestureRecognizer) {
         setupDisplay()
         guard let parent = self.superview else { return }
         let gestureIsDraggingFromLeftToRight = (gesture.velocity(in: superview).x > 0)
@@ -171,13 +171,13 @@ class DrawerMenu: UIControl {
     }
 }
 
-@objc protocol DrawerGestureDelegate : class {
+@objc public protocol DrawerGestureDelegate : class {
     /**
       * Handles the pan gesture from the view controller where the menu exists. ViewControllers that implement this method should call the handleGesture(_ gesture: UIPanGestureRecognizer) function on the DrawerMenu and getPanGesture(target: DrawerGestureDelegate) -> UIPanGestureRecognizer to create and add the pan gesture to their view.
      - Parameters:
         - gesture: The pan gesture recognizer that is generated from the getPanGesture method on the DrawerMenu
     */
-    @objc func handlePanGesture(_ gesture: UIPanGestureRecognizer)
+     @objc func handlePanGesture(_ gesture: UIPanGestureRecognizer)
 }
 
 extension UIView {
