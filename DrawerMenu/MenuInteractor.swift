@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class MenuInteractor: NSObject {
+class MenuInteractor: NSObject, MenuInteractorProtocol {
     
     private let HEADER_HEIGHT = 75
     private let CELL_HEIGHT = 44
@@ -18,7 +18,7 @@ class MenuInteractor: NSObject {
     
     lazy var menuTable: UITableView = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     
-    func setMenuData(_ menu: DrawerMenu) {
+    func loadMenuData(_ menu: DrawerMenu) {
         self.menuData = delegate?.setDataSource(drawerMenu: menu)
     }
     
@@ -29,13 +29,20 @@ class MenuInteractor: NSObject {
      - Parameters:
         - menuView: The table view that represents the menu.
     */
-    func setup(_ menuView: UITableView) {
-        menuView.dataSource = self
-        menuView.delegate = self
-        menuView.register(UITableViewCell.self, forCellReuseIdentifier: CELL_REUSE_ID)
-        menuView.bounces = false
-        menuTable = menuView
+    func setup() {
+        menuTable.dataSource = self
+        menuTable.delegate = self
+        menuTable.register(UITableViewCell.self, forCellReuseIdentifier: CELL_REUSE_ID)
+        menuTable.bounces = false
     }
+}
+
+protocol MenuInteractorProtocol {
+    var menuTable: UITableView {get set}
+    var delegate: MenuInteractorDelegate? { get set }
+    
+    func setup()
+    func loadMenuData(_ menu: DrawerMenu)
 }
 
 public protocol MenuInteractorDelegate : class {

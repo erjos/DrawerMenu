@@ -18,7 +18,7 @@ public class DrawerMenu: UIControl {
         set { menuInteractor.delegate = newValue }
     }
     
-    private var menuInteractor = MenuInteractor()
+    private var menuInteractor : MenuInteractorProtocol = MenuInteractor()
     
     private var menuView : UITableView {
         get { return menuInteractor.menuTable }
@@ -62,7 +62,7 @@ public class DrawerMenu: UIControl {
     */
     public func loadMenu() {
         //triggers delegate function on menu interactor to retrieve the data source from the delegate
-        menuInteractor.setMenuData(self)
+        menuInteractor.loadMenuData(self)
         menuView.reloadData()
     }
     
@@ -112,7 +112,7 @@ public class DrawerMenu: UIControl {
     }
 
     private func commonInit() {
-        self.menuInteractor.setup(menuView)
+        self.menuInteractor.setup()
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(DrawerMenu.didTap(_:))))
         
         let menuImage = UIImage(named: DEFAULT_MENU_IMAGE, in: Bundle(identifier: "com.erj.DrawerMenu"), with: nil)
