@@ -113,7 +113,7 @@ extension MenuInteractor: UITableViewDataSource {
 
 extension MenuInteractor: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let bundle = Bundle.init(identifier: "com.erj.DrawerMenu")
+        let bundle = Bundle(identifier: "com.erj.DrawerMenu")
         guard let header = bundle?.loadNibNamed(HEADER_VIEW, owner: self, options: nil)?.first as? DrawerHeaderView else {
             print("Failed to load and cast view")
             return UIView()

@@ -31,6 +31,8 @@ public class DrawerMenu: UIControl {
     private let shadowWidth:CGFloat = 5
     
     private var isDisplayAdded = false
+    private let DEFAULT_MENU_IMAGE = "menu_black"
+    private let BUNDLE_ID = "com.erj.DrawerMenu"
     
     private func setupDisplay() {
         guard !isDisplayAdded else { return }
@@ -113,7 +115,7 @@ public class DrawerMenu: UIControl {
         self.menuInteractor.setup(menuView)
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(DrawerMenu.didTap(_:))))
         
-        let menuImage = UIImage(named: "menu_black")
+        let menuImage = UIImage(named: DEFAULT_MENU_IMAGE, in: Bundle(identifier: "com.erj.DrawerMenu"), with: nil)
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
         imageView.image = menuImage
         self.addSubview(imageView)
@@ -139,7 +141,7 @@ public class DrawerMenu: UIControl {
         let gestureIsDraggingFromLeftToRight = (gesture.velocity(in: superview).x > 0)
         switch gesture.state {
         case .began:
-            print("began")
+            return
         case .changed:
             if let _ = gesture.view {
                 let newWidth = (self.menuView.frame.width) + gesture.translation(in: parent).x
