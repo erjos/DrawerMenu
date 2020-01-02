@@ -36,6 +36,11 @@ public class DrawerMenu: UIControl {
     
     private func setupDisplay() {
         guard !isDisplayAdded else { return }
+        guard let parent = self.superview else { return }
+        shadowView.setHeight(parent.frame.height)
+        coverView.setHeight(parent.frame.height)
+        menuView.setHeight(parent.frame.height)
+        
         self.superview?.addSubview(shadowView)
         self.superview?.addSubview(menuView)
         self.superview?.addSubview(coverView)
@@ -183,6 +188,18 @@ public class DrawerMenu: UIControl {
 }
 
 extension UIView {
+    func setWidth(_ width: CGFloat) {
+        self.frame = CGRect(x: self.frame.midX, y: self.frame.midY, width: width, height: self.frame.height)
+    }
+    
+    func setHeight(_ height: CGFloat) {
+        self.frame = CGRect(x: self.frame.midX, y: self.frame.midY, width: self.frame.width , height: height)
+    }
+    
+    func setSize(_ width: CGFloat, _ height: CGFloat) {
+        self.frame = CGRect(x: self.frame.midX, y: self.frame.midY, width: width , height: height)
+    }
+    
     func dropShadow() {
         self.layer.masksToBounds = false
         self.layer.shadowColor = UIColor.black.cgColor
