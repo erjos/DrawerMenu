@@ -20,7 +20,7 @@ public class DrawerMenu: UIControl {
     
     private var menuInteractor : MenuInteractorProtocol = MenuInteractor()
     
-    private var menuView : UITableView {
+    private(set) var menuView : UITableView {
         get { return menuInteractor.menuTable }
         set { menuInteractor.menuTable = newValue }
     }
@@ -30,7 +30,9 @@ public class DrawerMenu: UIControl {
     
     private let shadowWidth:CGFloat = 5
     
-    private var isDisplayAdded = false
+    
+    public private(set) var isDisplayAdded = false
+    
     private let DEFAULT_MENU_IMAGE = "menu_black"
     private let BUNDLE_ID = "com.erj.DrawerMenu"
     

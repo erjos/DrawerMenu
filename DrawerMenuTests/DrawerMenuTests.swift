@@ -9,26 +9,47 @@
 import XCTest
 @testable import DrawerMenu
 
+class MockGestureDelegate: DrawerGestureDelegate {
+    func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
+        //call the gesture on the drawer menu...
+    }
+}
+
 class DrawerMenuTests: XCTestCase {
 
+    var drawerMenu: DrawerMenu!
+    var containingView: UIView!
+    var swipePanGesture: UIPanGestureRecognizer!
+    
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        drawerMenu = DrawerMenu(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        containingView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        containingView.addSubview(drawerMenu)
+        drawerMenu.gestureDelegate = MockGestureDelegate()
+    }
+    
+    func testDrawerSetup() {
+        drawerMenu.openMenu()
+        
+        XCTAssertNotNil(drawerMenu.menuView)
+        XCTAssertTrue(drawerMenu.isDisplayAdded, "The menu display should be added after openMenu is called once")
+    }
+    
+    func testDrawerClose() {
+        drawerMenu.closeMenu()
+        
+        XCTAssert(drawerMenu.menuView.frame.width == 0)
+    }
+    
+    func testPanGestureSetup() {
+        swipePanGesture = drawerMenu.getPanGesture()
+    }
+    
+    func testPanGesture() {
+        
+        drawerMenu.handleGesture(swipePanGesture)
     }
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
+    override func tearDown() { }
+    
 }
