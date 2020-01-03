@@ -18,9 +18,8 @@ public class DrawerMenu: UIControl {
     
     private var menuInteractor : MenuInteractorProtocol = MenuInteractor()
     
-    private(set) var menuView : UITableView {
+    public var menuView : UITableView {
         get { return menuInteractor.menuTable }
-        set { menuInteractor.menuTable = newValue }
     }
     
     private lazy var coverView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
@@ -127,20 +126,47 @@ public class DrawerMenu: UIControl {
         self.loadMenu()
     }
     
-    @objc private func handleCoverTap(_ gesture: UITapGestureRecognizer) {
+    @objc func handleCoverTap(_ gesture: UITapGestureRecognizer) {
         closeMenu()
     }
     
-    @objc private func didTap(_ gesture: UITapGestureRecognizer) {
+    @objc func didTap(_ gesture: UITapGestureRecognizer) {
         openMenu()
     }
     
+    func panGestureChanged(_ newWidth: CGFloat, _ parent: UIView) {
+        self.menuView.frame = CGRect(x: 0, y: 0, width: newWidth, height: parent.frame.height)
+        self.coverView.frame = CGRect(x: newWidth, y: 0, width: parent.frame.width - newWidth, height: parent.frame.height)
+        self.shadowView.frame = CGRect(x: newWidth - shadowWidth, y: 0, width: shadowWidth, height: parent.frame.height)
+    }
+    
+    //could probably break this down to unit test all pathways
+    //TODO: the 150 marker needs to change to reflect the potential dynamic width of the screen the menu is on
+    func panGestureEnded(_ leftToRight: Bool, _ menuView: UITableView) {
+        if leftToRight {
+            let hasMovedGreaterThanHalfway = (menuView.frame.width) > 150
+            if (hasMovedGreaterThanHalfway) {
+                self.openMenu()
+            } else {
+                self.closeMenu()
+            }
+        } else {
+            let hasMovedGreaterThanHalfway = (menuView.frame.width) < 150
+            if (hasMovedGreaterThanHalfway) {
+                self.closeMenu()
+            } else {
+                self.openMenu()
+            }
+        }
+    }
+    
+    //TODO: change this documentation - consider breaking this method down into multiple methods so we can test them
     /**
       * This function handles the gesture logic for the standard sliding drawer behavior. Implement this method in the DrawerGestureDelegate to handle the gesture added on the view where the menu lives.
      - Parameters:
         - gesture: The pan gesture on the view, which controls the menu.
     */
-    @objc public func handleGesture(_ gesture: UIPanGestureRecognizer) {
+    @objc func handleGesture(_ gesture: UIPanGestureRecognizer) {
         setupDisplay()
         guard let parent = self.superview else { return }
         let gestureIsDraggingFromLeftToRight = (gesture.velocity(in: superview).x > 0)
@@ -150,53 +176,13 @@ public class DrawerMenu: UIControl {
         case .changed:
             if let _ = gesture.view {
                 let newWidth = (self.menuView.frame.width) + gesture.translation(in: parent).x
-                self.menuView.frame = CGRect(x: 0, y: 0, width: newWidth, height: parent.frame.height)
-                self.coverView.frame = CGRect(x: newWidth, y: 0, width: parent.frame.width - newWidth, height: parent.frame.height)
-                self.shadowView.frame = CGRect(x: newWidth - shadowWidth, y: 0, width: shadowWidth, height: parent.frame.height)
-                
+                panGestureChanged(newWidth, parent)
                 gesture.setTranslation(CGPoint.zero, in: parent)
             }
         case .ended:
-            if gestureIsDraggingFromLeftToRight {
-                let hasMovedGreaterThanHalfway = (menuView.frame.width) > 150
-                if (hasMovedGreaterThanHalfway) {
-                    self.openMenu()
-                } else {
-                    self.closeMenu()
-                }
-            } else {
-                let hasMovedGreaterThanHalfway = (menuView.frame.width) < 150
-                if (hasMovedGreaterThanHalfway) {
-                    self.closeMenu()
-                } else {
-                    self.openMenu()
-                }
-            }
+            panGestureEnded(gestureIsDraggingFromLeftToRight, menuView)
         default:
             break
         }
-    }
-}
-
-extension UIView {
-    func setWidth(_ width: CGFloat) {
-        self.frame = CGRect(x: self.frame.midX, y: self.frame.midY, width: width, height: self.frame.height)
-    }
-    
-    func setHeight(_ height: CGFloat) {
-        self.frame = CGRect(x: self.frame.midX, y: self.frame.midY, width: self.frame.width , height: height)
-    }
-    
-    func setSize(_ width: CGFloat, _ height: CGFloat) {
-        self.frame = CGRect(x: self.frame.midX, y: self.frame.midY, width: width , height: height)
-    }
-    
-    func dropShadow() {
-        self.layer.masksToBounds = false
-        self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowOpacity = 1.0
-        self.layer.shadowOffset = CGSize(width: 3.0, height: 0.0)
-        self.layer.shadowRadius = 3.0
-        self.layer.cornerRadius = 0.0
     }
 }

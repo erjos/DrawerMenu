@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5245F8DC23BE925D00B83392 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5245F8DB23BE925D00B83392 /* Assets.xcassets */; };
+		52503B2923BF507000E06F0C /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52503B2823BF507000E06F0C /* ViewExtensions.swift */; };
 		5257708523BC52E40042F0DF /* DrawerHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5257708023BC52E40042F0DF /* DrawerHeaderView.xib */; };
 		5257708623BC52E40042F0DF /* MenuInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5257708123BC52E40042F0DF /* MenuInteractor.swift */; };
 		5257708723BC52E40042F0DF /* MenuData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5257708223BC52E40042F0DF /* MenuData.swift */; };
@@ -30,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		5245F8DB23BE925D00B83392 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		52503B2823BF507000E06F0C /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		5257708023BC52E40042F0DF /* DrawerHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DrawerHeaderView.xib; sourceTree = "<group>"; };
 		5257708123BC52E40042F0DF /* MenuInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuInteractor.swift; sourceTree = "<group>"; };
 		5257708223BC52E40042F0DF /* MenuData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuData.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 				5257708223BC52E40042F0DF /* MenuData.swift */,
 				5257708323BC52E40042F0DF /* DrawerHeaderView.swift */,
 				5257708423BC52E40042F0DF /* DrawerMenu.swift */,
+				52503B2823BF507000E06F0C /* ViewExtensions.swift */,
 				52D78C3723B6BF810004031A /* DrawerMenu.h */,
 				52D78C3823B6BF810004031A /* Info.plist */,
 				5245F8DB23BE925D00B83392 /* Assets.xcassets */,
@@ -218,6 +221,7 @@
 				5257708823BC52E40042F0DF /* DrawerHeaderView.swift in Sources */,
 				5257708923BC52E40042F0DF /* DrawerMenu.swift in Sources */,
 				5257708723BC52E40042F0DF /* MenuData.swift in Sources */,
+				52503B2923BF507000E06F0C /* ViewExtensions.swift in Sources */,
 				5257708623BC52E40042F0DF /* MenuInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
