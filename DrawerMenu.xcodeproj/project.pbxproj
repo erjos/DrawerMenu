@@ -17,6 +17,9 @@
 		52D78C3E23B6BF810004031A /* DrawerMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D78C3423B6BF810004031A /* DrawerMenu.framework */; };
 		52D78C4323B6BF810004031A /* DrawerMenuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D78C4223B6BF810004031A /* DrawerMenuTests.swift */; };
 		52D78C4523B6BF810004031A /* DrawerMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = 52D78C3723B6BF810004031A /* DrawerMenu.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		52F99D9023C15CC400BC4E69 /* MenuDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F99D8F23C15CC400BC4E69 /* MenuDataTests.swift */; };
+		52F99D9223C15D6D00BC4E69 /* DrawerHeaderViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F99D9123C15D6D00BC4E69 /* DrawerHeaderViewTests.swift */; };
+		52F99D9423C15D9F00BC4E69 /* MenuInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F99D9323C15D9F00BC4E69 /* MenuInteractorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +46,9 @@
 		52D78C3D23B6BF810004031A /* DrawerMenuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DrawerMenuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		52D78C4223B6BF810004031A /* DrawerMenuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerMenuTests.swift; sourceTree = "<group>"; };
 		52D78C4423B6BF810004031A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		52F99D8F23C15CC400BC4E69 /* MenuDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuDataTests.swift; sourceTree = "<group>"; };
+		52F99D9123C15D6D00BC4E69 /* DrawerHeaderViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerHeaderViewTests.swift; sourceTree = "<group>"; };
+		52F99D9323C15D9F00BC4E69 /* MenuInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuInteractorTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,8 +107,11 @@
 		52D78C4123B6BF810004031A /* DrawerMenuTests */ = {
 			isa = PBXGroup;
 			children = (
+				52F99D8F23C15CC400BC4E69 /* MenuDataTests.swift */,
+				52F99D9123C15D6D00BC4E69 /* DrawerHeaderViewTests.swift */,
 				52D78C4223B6BF810004031A /* DrawerMenuTests.swift */,
 				52D78C4423B6BF810004031A /* Info.plist */,
+				52F99D9323C15D9F00BC4E69 /* MenuInteractorTests.swift */,
 			);
 			path = DrawerMenuTests;
 			sourceTree = "<group>";
@@ -230,7 +239,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52F99D9023C15CC400BC4E69 /* MenuDataTests.swift in Sources */,
 				52D78C4323B6BF810004031A /* DrawerMenuTests.swift in Sources */,
+				52F99D9223C15D6D00BC4E69 /* DrawerHeaderViewTests.swift in Sources */,
+				52F99D9423C15D9F00BC4E69 /* MenuInteractorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

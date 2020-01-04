@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DrawerHeaderView: UIView {
+class DrawerHeaderView: UITableViewHeaderFooterView {
 
     @IBOutlet weak var editDoneButton: UIButton!
     @IBOutlet weak var headerLeadingConstraint: NSLayoutConstraint!
@@ -27,6 +27,7 @@ class DrawerHeaderView: UIView {
     }
     
     @IBAction func editButtonPressed(_ sender: Any) {
+        //TODO: will crash if called when the title is nil
         let isEdit = self.editDoneButton.currentTitle == EDIT_LABEL
         let title = isEdit ? DONE_LABEL : EDIT_LABEL
         self.editDoneButton.setTitle(title, for: .normal)

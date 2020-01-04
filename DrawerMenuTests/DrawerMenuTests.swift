@@ -9,13 +9,39 @@
 import XCTest
 @testable import DrawerMenu
 
+//we already access a table view from an interactor that is concealed by the DrawerMenuTests
+
+class MockMenuDelegate : MenuInteractorDelegate {
+    
+    func setDataSource(drawerMenu: DrawerMenu) -> MenuData {
+        //
+        return MenuData("Menu", ["item1","item2","item3"], false, false)
+    }
+    
+    func didSelectItem(indexPath: IndexPath, label: String) {
+        //
+    }
+    
+    func didPressBack() {
+        //
+    }
+    
+    func didDeleteItem(indexPath: IndexPath, label: String) {
+        //
+    }
+}
+
 class DrawerMenuTests: XCTestCase {
 
     var drawerMenu: DrawerMenu!
-    var containingView: UIView!
+    var containingView : UIView!
+    var menuInteractor : MenuInteractorProtocol = MenuInteractor()
+    var mockDelegate = MockMenuDelegate()
+    var header = DrawerHeaderView()
     
     override func setUp() {
         drawerMenu = DrawerMenu(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        drawerMenu.delegate = mockDelegate
         containingView = UIView(frame: CGRect(x: 0, y: 0, width: 300, height: 600))
         containingView.addSubview(drawerMenu)
     }
@@ -51,6 +77,37 @@ class DrawerMenuTests: XCTestCase {
         drawerMenu.menuView.setWidth(140)
         drawerMenu.panGestureEnded(false, drawerMenu.menuView)
         XCTAssertTrue(drawerMenu.menuView.frame.width == 0)
+    }
+    
+    func testLoadMenuData() {
+        //this will trigger most of the table view methods 
+        drawerMenu.loadMenu()
+        drawerMenu.openMenu()
+        
+        //what are we asserting here?
+    }
+    
+    func testBackButton() {
+        //create menu to data to show/hide the back button
+        
+        header.backButtonPressed(drawerMenu)
+        //test that it should trigger the delegate function
+        drawerMenu.openMenu()
+        XCTAssertNotNil(header)
+    }
+    
+    func testEditButton() {
+        //doesnt work with plain header - need to set it up so that we can make test the individual parts
+        header.editButtonPressed(drawerMenu)
+        //test that delegate function triggers
+    }
+    
+    func testEdit() {
+        
+    }
+    
+    func testDone() {
+        
     }
 
     override func tearDown() { }

@@ -123,6 +123,8 @@ public class DrawerMenu: UIControl {
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
         imageView.image = menuImage
         self.addSubview(imageView)
+        
+        //TODO: not sure if it makes sense to call this here
         self.loadMenu()
     }
     
