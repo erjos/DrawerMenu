@@ -67,7 +67,7 @@ public class DrawerMenu: UIControl {
     public func loadMenu() {
         //triggers delegate function on menu interactor to retrieve the data source from the delegate
         menuInteractor.loadMenuData(self)
-        menuView.reloadData()
+        
     }
     
     /**

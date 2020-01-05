@@ -14,12 +14,14 @@ class MenuInteractor: NSObject, MenuInteractorProtocol {
     private let CELL_HEIGHT = 44
     private let HEADER_VIEW = "DrawerHeaderView"
     private let CELL_REUSE_ID = "menuCell"
-    private var menuData: MenuData?
+    
+    private(set) var menuData: MenuData?
     
     lazy var menuTable: UITableView = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     
     func loadMenuData(_ menu: DrawerMenu) {
         self.menuData = delegate?.setDataSource(drawerMenu: menu)
+        menuTable.reloadData()
     }
     
     weak var delegate: MenuInteractorDelegate?
@@ -121,10 +123,7 @@ extension MenuInteractor: UITableViewDataSource {
 extension MenuInteractor: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let bundle = Bundle(identifier: "com.erj.DrawerMenu")
-        guard let header = bundle?.loadNibNamed(HEADER_VIEW, owner: self, options: nil)?.first as? DrawerHeaderView else {
-            print("Failed to load and cast view")
-            return UIView()
-        }
+        guard let header = bundle?.loadNibNamed(HEADER_VIEW, owner: self, options: nil)?.first as? DrawerHeaderView else { fatalError("Failed to cast header view.") }
         
         header.delegate = self
         if let data = menuData {

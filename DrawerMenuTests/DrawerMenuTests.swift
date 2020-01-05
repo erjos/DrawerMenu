@@ -84,7 +84,5 @@ class DrawerMenuTests: XCTestCase {
         drawerMenu.loadMenu()
         drawerMenu.openMenu()
     }
-
-    override func tearDown() { }
     
 }

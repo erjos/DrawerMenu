@@ -109,9 +109,9 @@
 			children = (
 				52F99D8F23C15CC400BC4E69 /* MenuDataTests.swift */,
 				52F99D9123C15D6D00BC4E69 /* DrawerHeaderViewTests.swift */,
+				52F99D9323C15D9F00BC4E69 /* MenuInteractorTests.swift */,
 				52D78C4223B6BF810004031A /* DrawerMenuTests.swift */,
 				52D78C4423B6BF810004031A /* Info.plist */,
-				52F99D9323C15D9F00BC4E69 /* MenuInteractorTests.swift */,
 			);
 			path = DrawerMenuTests;
 			sourceTree = "<group>";
