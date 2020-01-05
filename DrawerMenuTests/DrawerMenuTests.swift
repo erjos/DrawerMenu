@@ -83,31 +83,6 @@ class DrawerMenuTests: XCTestCase {
         //this will trigger most of the table view methods 
         drawerMenu.loadMenu()
         drawerMenu.openMenu()
-        
-        //what are we asserting here?
-    }
-    
-    func testBackButton() {
-        //create menu to data to show/hide the back button
-        
-        header.backButtonPressed(drawerMenu)
-        //test that it should trigger the delegate function
-        drawerMenu.openMenu()
-        XCTAssertNotNil(header)
-    }
-    
-    func testEditButton() {
-        //doesnt work with plain header - need to set it up so that we can make test the individual parts
-        header.editButtonPressed(drawerMenu)
-        //test that delegate function triggers
-    }
-    
-    func testEdit() {
-        
-    }
-    
-    func testDone() {
-        
     }
 
     override func tearDown() { }

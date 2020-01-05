@@ -24,15 +24,13 @@ class MockHeaderDelegate: HeaderViewDelegate {
 }
 
 class DrawerHeaderViewTests: XCTestCase {
-    let bundle = Bundle(identifier: "com.erj.DrawerMenu")
     lazy var menuData = MenuData("Menu", ["item1","item2","item3"], false, false)
     lazy var mockDelegate = MockHeaderDelegate()
-    
     var headerView : DrawerHeaderView!
 
     override func setUp() {
+        let bundle = Bundle(identifier: "com.erj.DrawerMenu")
         headerView = UINib(nibName: "DrawerHeaderView", bundle: bundle).instantiate(withOwner: nil, options: nil)[0] as? DrawerHeaderView
-        
         headerView.setupHeaderView(menuData, 0)
         headerView.delegate = mockDelegate
     }
