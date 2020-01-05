@@ -61,4 +61,46 @@ class DrawerMenuTests: XCTestCase {
         drawerMenu.openMenu()
     }
     
+    func testDelegate() {
+        let mockDelegate = MockInteractorDelegate()
+        drawerMenu.delegate = mockDelegate
+        XCTAssertNotNil(drawerMenu.delegate)
+    }
+    
+    func testCoverTap() {
+        drawerMenu.openMenu()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(drawerMenu.handleCoverTap(_:)))
+        drawerMenu.handleCoverTap(tap)
+        XCTAssertTrue(drawerMenu.menuView.frame.width == 0)
+    }
+    
+    func testMenuOpenTap() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(drawerMenu.didTap(_:)))
+        drawerMenu.didTap(tap)
+        XCTAssertTrue(drawerMenu.menuView.frame.width != 0)
+    }
+    
+    func testPanGestureBegan() {
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(drawerMenu.handleGesture(_:)))
+        pan.state = .began
+        drawerMenu.handleGesture(pan)
+        XCTAssertTrue(drawerMenu.menuView.frame.width == 0)
+    }
+    
+    func testPanGestureEnded() {
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(drawerMenu.handleGesture(_:)))
+        pan.state = .ended
+        drawerMenu.handleGesture(pan)
+    }
+    
+    func testPanGestureChanged() {
+        let pan = UIPanGestureRecognizer(target: containingView, action: #selector(drawerMenu.handleGesture(_:)))
+        containingView.addGestureRecognizer(pan)
+        pan.state = .began
+        pan.setTranslation(CGPoint(x: 50, y: 50), in: containingView)
+        pan.state = .changed
+        XCTAssertTrue(pan.state == .changed)
+        drawerMenu.handleGesture(pan)
+        XCTAssertTrue(pan.translation(in: containingView) == CGPoint.zero)
+    }
 }
