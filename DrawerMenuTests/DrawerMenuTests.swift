@@ -9,28 +9,6 @@
 import XCTest
 @testable import DrawerMenu
 
-//we already access a table view from an interactor that is concealed by the DrawerMenuTests
-
-class MockMenuDelegate : MenuInteractorDelegate {
-    
-    func setDataSource(drawerMenu: DrawerMenu) -> MenuData {
-        //
-        return MenuData("Menu", ["item1","item2","item3"], false, false)
-    }
-    
-    func didSelectItem(indexPath: IndexPath, label: String) {
-        //
-    }
-    
-    func didPressBack() {
-        //
-    }
-    
-    func didDeleteItem(indexPath: IndexPath, label: String) {
-        //
-    }
-}
-
 class DrawerMenuTests: XCTestCase {
 
     var drawerMenu: DrawerMenu!
