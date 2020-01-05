@@ -44,13 +44,13 @@ class DrawerMenuTests: XCTestCase {
     func testPanEndedShouldOpen() {
         //this will need to be changed when we update the 150 value
         drawerMenu.menuView.setWidth(160)
-        drawerMenu.panGestureEnded(true, drawerMenu.menuView)
+        drawerMenu.panGestureEnded(true, drawerMenu.menuView, containingView)
         XCTAssertTrue(drawerMenu.menuView.frame.width > 0)
     }
     
     func testPanEndedShouldClose() {
         drawerMenu.menuView.setWidth(140)
-        drawerMenu.panGestureEnded(false, drawerMenu.menuView)
+        drawerMenu.panGestureEnded(false, drawerMenu.menuView, containingView)
         XCTAssertTrue(drawerMenu.menuView.frame.width == 0)
     }
     

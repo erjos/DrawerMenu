@@ -25,8 +25,7 @@ public class DrawerMenu: UIControl {
     private lazy var coverView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     private lazy var shadowView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     
-    private let shadowWidth:CGFloat = 5
-    
+    private let SHADOW_WIDTH : CGFloat = 5
     
     public private(set) var isDisplayAdded = false
     
@@ -79,7 +78,7 @@ public class DrawerMenu: UIControl {
             guard let parent = self.superview else { return }
             let menuWidth = parent.frame.width * (2/3)
             self.menuView.frame = CGRect(x: 0, y: 0, width: menuWidth, height: parent.frame.height)
-            self.shadowView.frame = CGRect(x: (menuWidth - self.shadowWidth), y: 0, width: self.shadowWidth, height: parent.frame.height)
+            self.shadowView.frame = CGRect(x: (menuWidth - self.SHADOW_WIDTH), y: 0, width: self.SHADOW_WIDTH, height: parent.frame.height)
             self.coverView.frame = CGRect(x: menuWidth, y: 0, width: parent.frame.width - menuWidth, height: parent.frame.height)
             self.superview?.layoutIfNeeded()
         }
@@ -138,20 +137,20 @@ public class DrawerMenu: UIControl {
     func panGestureChanged(_ newWidth: CGFloat, _ parent: UIView) {
         self.menuView.frame = CGRect(x: 0, y: 0, width: newWidth, height: parent.frame.height)
         self.coverView.frame = CGRect(x: newWidth, y: 0, width: parent.frame.width - newWidth, height: parent.frame.height)
-        self.shadowView.frame = CGRect(x: newWidth - shadowWidth, y: 0, width: shadowWidth, height: parent.frame.height)
+        self.shadowView.frame = CGRect(x: newWidth - SHADOW_WIDTH, y: 0, width: SHADOW_WIDTH, height: parent.frame.height)
     }
     
-    //TODO: the 150 marker needs to change to reflect the potential dynamic width of the screen the menu is on
-    func panGestureEnded(_ leftToRight: Bool, _ menuView: UITableView) {
+    func panGestureEnded(_ leftToRight: Bool, _ menuView: UITableView, _ parentView: UIView) {
+        let halfwayPoint = parentView.frame.width / 2
         if leftToRight {
-            let hasMovedGreaterThanHalfway = (menuView.frame.width) > 150
+            let hasMovedGreaterThanHalfway = (menuView.frame.width) > halfwayPoint
             if (hasMovedGreaterThanHalfway) {
                 self.openMenu()
             } else {
                 self.closeMenu()
             }
         } else {
-            let hasMovedGreaterThanHalfway = (menuView.frame.width) < 150
+            let hasMovedGreaterThanHalfway = (menuView.frame.width) < halfwayPoint
             if (hasMovedGreaterThanHalfway) {
                 self.closeMenu()
             } else {
@@ -179,7 +178,7 @@ public class DrawerMenu: UIControl {
                 gesture.setTranslation(CGPoint.zero, in: parent)
             }
         case .ended:
-            panGestureEnded(gestureIsDraggingFromLeftToRight, menuView)
+            panGestureEnded(gestureIsDraggingFromLeftToRight, menuView, parent)
         default:
             break
         }
