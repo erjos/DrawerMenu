@@ -38,7 +38,6 @@ class DrawerMenuTests: XCTestCase {
     
     func testDrawerClose() {
         drawerMenu.closeMenu()
-        
         XCTAssert(drawerMenu.menuView.frame.width == 0)
     }
     

@@ -124,7 +124,6 @@ public class DrawerMenu: UIControl {
         imageView.image = menuImage
         self.addSubview(imageView)
         
-        //TODO: not sure if it makes sense to call this here
         self.loadMenu()
     }
     
@@ -142,7 +141,6 @@ public class DrawerMenu: UIControl {
         self.shadowView.frame = CGRect(x: newWidth - shadowWidth, y: 0, width: shadowWidth, height: parent.frame.height)
     }
     
-    //could probably break this down to unit test all pathways
     //TODO: the 150 marker needs to change to reflect the potential dynamic width of the screen the menu is on
     func panGestureEnded(_ leftToRight: Bool, _ menuView: UITableView) {
         if leftToRight {
@@ -162,9 +160,8 @@ public class DrawerMenu: UIControl {
         }
     }
     
-    //TODO: change this documentation - consider breaking this method down into multiple methods so we can test them
     /**
-      * This function handles the gesture logic for the standard sliding drawer behavior. Implement this method in the DrawerGestureDelegate to handle the gesture added on the view where the menu lives.
+      * This function handles the gesture logic for the standard sliding drawer behavior.
      - Parameters:
         - gesture: The pan gesture on the view, which controls the menu.
     */
