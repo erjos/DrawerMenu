@@ -27,11 +27,9 @@ class DrawerHeaderView: UITableViewHeaderFooterView {
     }
     
     @IBAction func editButtonPressed(_ sender: Any) {
-        //TODO: will crash if called when the title is nil
         let isEdit = self.editDoneButton.currentTitle == EDIT_LABEL
         let title = isEdit ? DONE_LABEL : EDIT_LABEL
         self.editDoneButton.setTitle(title, for: .normal)
-        
         self.delegate?.didPressEdit(shouldEdit: isEdit)
     }
     
@@ -58,7 +56,6 @@ class DrawerHeaderView: UITableViewHeaderFooterView {
         hideEditButton(shouldHide: true)
         hideBackButton(shouldHide: true)
     }
-    
 }
 
 protocol HeaderViewDelegate: class {

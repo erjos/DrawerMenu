@@ -9,13 +9,60 @@
 import XCTest
 @testable import DrawerMenu
 
+class MockHeaderDelegate: HeaderViewDelegate {
+    var editPressed = false
+    var backPressed = false
+    
+    func didPressBack() {
+        backPressed = true
+    }
+    
+    func didPressEdit(shouldEdit: Bool) {
+        editPressed = true
+    }
+    
+}
+
 class DrawerHeaderViewTests: XCTestCase {
+    let bundle = Bundle(identifier: "com.erj.DrawerMenu")
+    lazy var menuData = MenuData("Menu", ["item1","item2","item3"], false, false)
+    lazy var mockDelegate = MockHeaderDelegate()
+    
+    var headerView : DrawerHeaderView!
 
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        headerView = UINib(nibName: "DrawerHeaderView", bundle: bundle).instantiate(withOwner: nil, options: nil)[0] as? DrawerHeaderView
+        
+        headerView.setupHeaderView(menuData, 0)
+        headerView.delegate = mockDelegate
     }
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    func testHeaderSetupBackEditHidden() {
+        XCTAssertTrue(headerView.headerLabel.text == "Menu")
+        XCTAssertTrue(headerView.backButton.isHidden)
+        XCTAssertTrue(headerView.editDoneButton.isHidden)
+    }
+
+    func testHeaderSetupBackEditShown() {
+        menuData.backButtonVisible = true
+        menuData.shouldEdit = true
+        headerView.setupHeaderView(menuData, 0)
+        XCTAssertTrue(!headerView.backButton.isHidden)
+        XCTAssertTrue(!headerView.editDoneButton.isHidden)
+    }
+
+    func testEditPressed() {
+        headerView.editButtonPressed(mockDelegate)
+        XCTAssertTrue(headerView.editDoneButton.currentTitle == "Done")
+        XCTAssertTrue(mockDelegate.editPressed)
+        mockDelegate.editPressed = false
+        headerView.editButtonPressed(mockDelegate)
+        XCTAssertTrue(headerView.editDoneButton.currentTitle == "Edit")
+        XCTAssertTrue(mockDelegate.editPressed)
+    }
+
+    func testPressBack() {
+        headerView.backButtonPressed(mockDelegate)
+        XCTAssertTrue(mockDelegate.backPressed)
     }
 }

@@ -10,6 +10,7 @@ import XCTest
 @testable import DrawerMenu
 
 class MenuDataTests: XCTestCase {
+    
     func testMenuDataInitializer() {
         let menuSection = MenuSection(["item1","item2","item3"], title: "MockMenu")
         let menuData = MenuData([menuSection])
