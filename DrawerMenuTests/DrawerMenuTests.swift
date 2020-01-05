@@ -14,12 +14,10 @@ class DrawerMenuTests: XCTestCase {
     var drawerMenu: DrawerMenu!
     var containingView : UIView!
     var menuInteractor : MenuInteractorProtocol = MenuInteractor()
-    var mockDelegate = MockMenuDelegate()
     var header = DrawerHeaderView()
     
     override func setUp() {
         drawerMenu = DrawerMenu(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        drawerMenu.delegate = mockDelegate
         containingView = UIView(frame: CGRect(x: 0, y: 0, width: 300, height: 600))
         containingView.addSubview(drawerMenu)
     }
